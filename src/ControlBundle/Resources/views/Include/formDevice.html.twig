@@ -1,0 +1,64 @@
+<div class="modal fade right" id="mensaje_usuarios{{ key }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify  modal-full-height modal-right" role="document">
+     
+        <div class="modal-content">
+        
+            <div class="modal-header dark-header">
+                <p class="heading lead">Asignar Usuarios</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body ">
+                <div class="text-center">
+                   <i class="fa fa-users fa-5x mb-1 animated rotateIn dark-icon"></i>
+ 
+										
+										<h5 class="h5-resposive"> Informacion de los usuarios</h5>
+                </div>
+                <hr>
+                <br>
+                
+
+      <form method="POST" action="{{ path('assignUser') }}">
+<div class="md-form error_div">
+            <i class="fa fa-microchip prefix"></i>
+            <input id="pin" name="pin" value="{{ device.pin }}" type="text" required class="form-control" readonly>
+            <label for="pin" >{{ device.nombre }} </label>
+        </div>
+<br>
+
+<div class="md-form error2_div">
+<i class="prefix"></i>
+          <em> <i class="fa fa-users fa-2x left icon left"></i>&nbsp;&nbsp;&nbsp;&nbsp;Seleccione los usuarios</em>
+ 
+         <select id="users" multiple name="users[]" data-placeholder="Usuarios" class="users{{ key }} chosen-select form-control validate" tabindex="5">      
+            <optgroup label="Lista de Usuarios">
+             {% for user in list %}
+             {% set activado = false %}
+             {% for relation in users[key] %}
+    {% if user.codigo == relation.codigo %}         
+{% set activado = true %}
+{% endif %}    
+ {% endfor %}
+
+<option {% if activado %} selected  {% endif %} value ="{{ user.codigo }}">{{ user.codigo }}</option>
+
+{% endfor %}
+
+           </optgroup>
+               
+          </select>
+ </div>
+     <br> 
+
+<center><button class="btn btn-lg  btn-unique waves-effect hoverable" type="submit"><i class='fa fa-plus left'></i> Registrar</button>  </center>
+			</form>				
+            </div>
+
+        </div>
+    
+    </div>
+</div>

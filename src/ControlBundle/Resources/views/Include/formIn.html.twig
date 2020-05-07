@@ -1,0 +1,64 @@
+<div class="modal fade right" id="mensaje_in{{ key }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-notify  modal-full-height modal-right" role="document">
+     
+        <div class="modal-content">
+        
+            <div class="modal-header dark-header">
+                <p class="heading lead">Asignar Dispositivos</p>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true" class="white-text">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body ">
+                <div class="text-center">
+                   <i class="fa fa-microchip fa-5x mb-1 animated rotateIn dark-icon"></i>
+ 
+										
+										<h5 class="h5-resposive"> Informacion de la Entrada</h5>
+                </div>
+                <hr>
+                <br>
+                
+
+      <form method="POST" action="{{ path('assignDevice') }}">
+<div class="md-form error_div">
+            <i class="fa fa-microchip prefix"></i>
+            <input id="in" name="in" value="{{ device.pin }}" type="text" required class="form-control" readonly>
+            <label for="in" >{{ device.nombre }} </label>
+        </div>
+<br>
+
+<div class="md-form error2_div">
+<i class="prefix"></i>
+          <em> <i class="fa fa-desktop fa-2x left icon left"></i>&nbsp;&nbsp;&nbsp;&nbsp;Seleccione los dispositivos</em>
+ 
+         <select id="outs" multiple name="outs[]" data-placeholder="Dispositivos" class="outs{{ cont2 }} chosen-select form-control validate" tabindex="5">      
+            <optgroup label="Lista de Dispositivos">
+             {% for device in list2 %}
+             {% set activado = false %}
+             {% for relation in devices[key] %}
+    {% if device.pin == relation.pout %}         
+{% set activado = true %}
+{% endif %}    
+ {% endfor %}
+
+<option {% if activado %} selected  {% endif %} value ="{{ device.pin }}">{{ device.nombre }}</option>
+
+{% endfor %}
+
+           </optgroup>
+               
+          </select>
+ </div>
+     <br> 
+
+<center><button class="btn btn-lg  btn-unique waves-effect hoverable" type="submit"><i class='fa fa-plus left'></i> Registrar</button>  </center>
+			</form>				
+            </div>
+
+        </div>
+    
+    </div>
+</div>

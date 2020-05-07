@@ -1,0 +1,10 @@
+services:
+    gpio.topic_service:
+        class: AppBundle\Topic\GpioTopic
+        tags:
+            - { name: gos_web_socket.topic }
+
+    gpio.rpc_service:
+        class: AppBundle\Rpc\GpioRpc
+        tags:
+            - { name: gos_web_socket.rpc }

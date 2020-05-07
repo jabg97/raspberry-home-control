@@ -1,0 +1,78 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+¿Olvido su Contraseña?
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css"  href="{{ asset('css/login/style.css') }}"/>
+{% endblock %}
+
+{% block body %}
+
+<div class="login-header" ></div>
+
+    <div class="container free-bird">
+
+        <div class="row">
+
+<div class="card hoverable col-md-10 col-lg-10 col-sm-10 mx-auto float-xs-none white z-depth-5 py-2 px-2">
+    <div class="card-block" >
+
+        <div class="form-header red darken-3 z-depth-5 hoverable">
+            <h3><i class="fa fa-unlock-alt"></i><strong> ¿Olvido su Contraseña?</strong></h3>
+        </div>
+              
+
+<form id="formu" action="{{ path('emailCheck') }}" method="POST">
+
+<div class="md-form error_div">
+            <i class="fa fa-envelope prefix"></i>
+            <input id="email" name="email" type="email" required class="form-control validate"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Ingrese un email v&aacute;lido">
+            <label for="email" data-error="Incorrecto" data-success="Correcto">Ingresa el email</label>
+        </div>
+<br/>
+        <div class="form-inline">
+<div class="md-form form-group">
+        <div class="text-xs-center">
+            <button class="btn btn-danger btn-lg boton waves-effect hoverable" type="submit"><i class="fa fa-send left"></i>Enviar</button>
+        </div>
+        </div>
+ 
+        </div>
+    
+
+     
+</form>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  
+        <div class="error4_div form-group">	</div>	
+
+	{% if message == "error" %}
+                {#  {{ error.messageKey|trans(error.messageData) }}#}
+       <div class='error3_div alert bg-danger waves-effect text-white z-depth-4 hoverable imenn'> <span  class="close" data-dismiss="alert" aria-label="close">&times;</span><center><strong> <i class="fa fa-1x fa-exclamation-circle left"></i>&nbsp;&nbsp;Error!</strong>
+              El usuario no esta registrado.</center></div>
+                        {% endif %}
+    
+  
+        </div>
+    </div>
+
+</div>
+           
+        </div>
+      </div>   
+{% include 'AppBundle:Include:forget.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('js/security/forget.js') }}" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+var  message="{{ message }}";
+
+if(message == "error"){
+$("#mensaje_error").modal('show');
+     }
+      </script>
+{% endblock %}

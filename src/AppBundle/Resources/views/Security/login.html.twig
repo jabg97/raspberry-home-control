@@ -1,0 +1,149 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+Inicio de sesion
+{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css"  href="{{ asset('css/login/style.css') }}"/>
+{% endblock %}
+
+{% block body %}
+
+<div class="login-header" ></div>
+
+    <div class="container free-bird">
+
+        <div class="row">
+
+<div class="card hoverable col-md-10 col-lg-10 col-sm-10 mx-auto float-xs-none white z-depth-5 py-2 px-2">
+    <div class="card-block" >
+
+        <div class="form-header red darken-3 z-depth-5 hoverable">
+            <h3><i class="fa fa-user-circle-o"></i><strong> Inicio de sesion</strong></h3>
+        </div>
+              
+
+<form id="formu" action="{{ path('security_login_check') }}" method="POST">
+
+ <div class="md-form error_div">
+            <i class="fa fa-user prefix"></i>       
+        <input type="text" required class="form-control validate vaciuser" id="username" name="_username" value="{{ last_username }}" pattern="[a-z0-9]{1,20}" title="Ingrese el nombre de usurio"/>
+        <label data-error="Incorrecto" data-success="Correcto" for="username">Ingresa el nombre de usurio.</label>
+            </div>
+<br/>
+  <div class="md-form error2_div">
+            <i class="fa fa-lock prefix"></i>
+            <input  type="password" class="form-control validate vacipass"  required id="password" name="_password" pattern="[A-Za-z0-9]{6,20}" title="Ingrese una contraseña válida"/>
+        <label data-error="Incorrecto" data-success="Correcto" for="username">Ingresa tu contraseña.</label>
+            </div>
+<br/>
+        <div class="form-inline">
+<div class="md-form form-group">
+        <div class="text-xs-center">
+            <button class="btn btn-danger btn-lg boton waves-effect hoverable" type="submit"><i class="fa fa-sign-in left"></i> Ingresar al sistema</button>
+        </div>
+        </div>
+ 
+        <div class="md-form form-group">
+         <div class="text-xs-center">
+            <a class="btn btn-outline-primary btn-lg waves-effect hoverable" href="{{ path('forget') }}"><i class="fa fa-unlock-alt left"></i> ¿Olvido su Contraseña?</a>
+        </div>
+        </div>
+        </div>
+    
+
+     
+</form>
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  
+        <div class="error4_div form-group">	</div>	
+
+	{% if error %}
+                {#  {{ error.messageKey|trans(error.messageData) }}#}
+       <div class='error3_div alert bg-danger waves-effect text-white z-depth-4 hoverable imenn'> <span  class="close" data-dismiss="alert" aria-label="close">&times;</span><center><strong> <i class="fa fa-1x fa-exclamation-circle left"></i>&nbsp;&nbsp;Error!</strong>
+              Codigo o contrase&ntilde;a incorrecta.</center></div>
+                        {% endif %}
+
+                        {% if message  == "update" %}
+                {#  {{ error.messageKey|trans(error.messageData) }}#}
+       <div class='error3_div alert alert bg-success waves-effect text-white z-depth-4 hoverable imenn'> <span  class="close" data-dismiss="alert" aria-label="close">&times;</span><center><strong><i class="fa fa-1x fa-check left"></i>&nbsp;&nbsp;Exito!</strong> La contrase&ntilde;a ha sido modificada.</center></div>
+                        {% endif %}
+
+                        {% if message  == "send" %}
+                {#  {{ error.messageKey|trans(error.messageData) }}#}
+       <div class='error3_div alert alert bg-success waves-effect text-white z-depth-4 hoverable imenn'> <span  class="close" data-dismiss="alert" aria-label="close">&times;</span><center><strong><i class="fa fa-1x fa-check left"></i>&nbsp;&nbsp;Exito!</strong> El email ha sido enviado, recuerde que el plazo para reestablecer la contraseña expira una hora despues de recibir el email.</center></div>
+                        {% endif %}
+    
+  
+        </div>
+    </div>
+
+</div>
+           
+        </div>
+      </div>   
+{% include 'AppBundle:Include:login.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+<script type="text/javascript" src="{{ asset('js/security/login.js') }}" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+var  error="{% if error %} {{ error.messageKey }}  {% endif %}";
+var  message="{{ message }}";
+
+     if(error != ""){
+$("#mensaje_error").modal('show');
+     }
+
+if(message == "update"){
+$("#mensaje_update").modal('show');
+     }
+
+     if(message == "send"){
+$("#mensaje_send").modal('show');
+     }
+
+      </script>
+      
+      <!--script type="text/javascript" charset="utf-8">
+        var websocket = WS.connect("ws://127.0.0.1:8080");
+
+        websocket.on("socket/connect", function(session){
+            session.subscribe("acme/channel", function(uri, payload){
+                console.log("Received message", payload.msg);
+            });
+
+            session.call("sample/sum", {"term1": 2, "term2": 5}).then(
+                    function(result)
+                    {
+                        console.log("RPC Valid!", result);
+                    },
+                    function(error, desc)
+                    {
+                        console.log("RPC Error", error, desc);
+                    }
+            );
+
+            session.publish("acme/channel", {msg: "This is a message!"});
+
+            session.publish("acme/channel", {msg: "I'm leaving, I will not see the next message"});
+
+            session.unsubscribe("acme/channel");
+
+            session.publish("acme/channel", {msg: "I won't see this"});
+
+            session.subscribe("acme/channel", function(uri, payload){
+                console.log("Received message", payload.msg);
+            });
+            session.publish("acme/channel", {msg: "I'm back!"});
+        });
+
+        websocket.on("socket/disconnect", function(error){
+            //error provides us with some insight into the disconnection: error.reason and error.code
+
+            console.log("Disconnected for " + error.reason + " with code " + error.code);
+        });
+    </script-->
+{% endblock %}

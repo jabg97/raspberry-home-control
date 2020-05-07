@@ -1,0 +1,114 @@
+<div class="card col-md-4 col-lg-4 col-sm-6 col-xs-12 mx-auto float-xs-none white z-depth-5 hoverable py-2 px-2">
+    <div class="card-block" >
+    {% if doble[i] %}
+    <div class="form-header z-depth-5 hoverable
+      header-primary
+      ">  
+       <h3><strong>{{ list[i][0].nombre }}</strong></h3>     
+       {% else %}
+<div id="head{{ list[i].log }}" class="form-header z-depth-5 hoverable
+    {% if state[i] == 0 %}
+      header-success 
+      {% else %}
+      header-danger
+      {% endif %}
+      ">  
+       <h3><strong>{{ list[i].nombre }}</strong></h3>
+       {% endif %}
+            
+        </div>
+<center>
+{% if doble[i] %}
+
+{#
+ <noscript>
+ <a href="gpio/{{ list[i][0].log }}/{{list[i][1].log }}/2">
+ </noscript>
+      <div onclick="enviar({{ list[i][0].log }},{{list[i][1].log }},2)">
+      <input value="{{ list[i][0].pin }}" data-on="Pin {{ list[i][0].pin }}: <i class='fa fa-arrow-up'></i>" data-off=" Pin {{ list[i][1].pin }}: <i class='fa fa-arrow-down'></i>" data-toggle="toggle" data-onstyle="primary" data-offstyle="info" data-size="large" type="checkbox" {% if state[i] == 0 %} checked {% endif %}/>      	  
+  </div>
+   <noscript>
+ </a>
+ </noscript> 
+ #}
+ 
+{% if state[i] == 0 %}
+ 
+{% set main_pin = list[i][1].pin %}
+{% set main_log = list[i][1].log %}
+{% set sub_pin = list[i][0].pin %}
+{% set sub_log = list[i][0].log %}
+
+{% else %}
+
+{% set main_pin = list[i][0].pin %}
+{% set main_log = list[i][0].log %}
+{% set sub_pin = list[i][1].pin %}
+{% set sub_log = list[i][1].log %}
+
+{% endif %}
+ 
+ <noscript>
+ <a href="gpio/{{ main_log }}/{{ sub_log }}/2">
+ </noscript>
+<button style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" 
+ unselectable="on"
+ onselectstart="return false;" 
+ onmousedown="enviar_ajax({{ main_log }},{{ sub_log }},2);return false;"
+ ontouchstart="enviar_ajax({{ main_log }},{{ sub_log }},2);return false;" 
+ onmouseup="enviar_ajax({{ main_log }},{{ sub_log }},3)" 
+ ontouchend="enviar_ajax({{ main_log }},{{ sub_log }},3)"
+class="btn btn-primary btn-lg">
+Pin {{ main_pin }}: <i class='fa fa-arrow-up'></i></button> 
+  <noscript>
+ </a>
+ </noscript>
+
+  <noscript>
+ <a href="gpio/{{ sub_log }}/{{ main_log }}/2">
+ </noscript>
+<button style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" 
+ unselectable="on"
+ onselectstart="return false;" 
+ onmousedown="enviar_ajax({{ sub_log }},{{ main_log }},2);return false;"
+ ontouchstart="enviar_ajax({{ sub_log }},{{ main_log }},2);return false;" 
+ onmouseup="enviar_ajax({{ main_log }},{{ sub_log }},3)" 
+ ontouchend="enviar_ajax({{ main_log }},{{ sub_log }},3)"
+class="btn btn-info btn-lg"class="btn btn-info btn-lg">
+Pin {{ sub_pin }} : 
+<i class='fa fa-arrow-down'></i></button> 
+  <noscript>
+ </a>
+ </noscript>
+
+  <noscript>
+ <a href="gpio/{{ main_log }}/{{ sub_log }}/3">
+ </noscript>
+<button class="btn btn-danger btn-lg" onclick="enviar_ajax({{ main_log }},{{ sub_log }},3)">
+Pin {{ main_pin }} -:- {{ sub_pin }}: 
+<i class='fa fa-ban'></i></button> 
+  <noscript>
+ </a>
+ </noscript>
+
+{% else %}
+
+ 
+<noscript>
+ <a href="gpio/{{ list[i].log }}/0/{{ state[i] == 0 ? 1 : 0 }}">
+ </noscript>
+ 
+      {#<div onclick="enviar({{ list[i].log }},-1,{{ state[i] == 0 ? 1 : 0 }})">#}
+      <div onclick="enviar_ajax_id({{ list[i].log }},-1,{{ list[i].log }})">
+      <input value="{{ list[i].pin }}" data-on="Pin {{ list[i].pin }}: <i class='fa fa-bolt'></i>" data-off=" Pin {{ list[i].pin }}: <i class='fa fa-ban'></i>" data-toggle="toggle" data-onstyle="success" data-offstyle="danger" data-size="large" type="checkbox" {% if state[i] == 0 %}checked {% endif %}/>
+      </div> 
+ <input type="hidden" id="val{{ list[i].log }}" value="{{ state[i] == 0 ? 1 : 0 }}"/>
+  <noscript>
+ </a>
+ </noscript>
+ 
+{% endif %}
+</center>
+</div>
+
+        </div>     
