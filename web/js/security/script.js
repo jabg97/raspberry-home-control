@@ -1,26 +1,4 @@
 $(document).ready(function(){	
-			
-			$(".vacipassA").keyup(function(){
-				this.value = this.value.replace(/[^A-Za-z0-9]/g,'')
-				if( $(this).val() != "" ){
-					$(".error1").fadeOut('slow');
-					return false;}
-				});
-				
-				$(".vacipassN").keyup(function(){
-					this.value = this.value.replace(/[^A-Za-z0-9]/g,'')
-				if( $(this).val() != "" ){
-					$(".error2").fadeOut('slow');
-					return false;}
-					});
-			
-			$(".vacipassR").keyup(function(){
-				this.value = this.value.replace(/[^A-Za-z0-9]/g,'')
-				
-				if( $(this).val() != "" ){
-					$(".error3").fadeOut('slow');
-					return false;}
-					});
 					
 	$('.boton').click(function(e) {
 		e.preventDefault();

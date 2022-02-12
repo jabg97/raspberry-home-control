@@ -2,14 +2,14 @@
 require("Mail.php");
 
 $server     = 'localhost'; //servidor
-$username   = 'root'; //usuario de la base de datos
-$password   = 'superuser2871172jaiver97'; //password del usuario de la base de datos
+$username   = 'home'; //usuario de la base de datos
+$password   = '2022Home*'; //password del usuario de la base de datos
 $database   = 'home'; //nombre de la base de datos
  
 
 $conexion = new MySQLi();
 @$conexion->connect($server, $username, $password, $database);
-
+//new Mail("test");
 if ($conexion->connect_error) 
 {
     die('Error de conexión: ' . $conexion->connect_error); 

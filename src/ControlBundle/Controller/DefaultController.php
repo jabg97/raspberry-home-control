@@ -26,16 +26,20 @@ class DefaultController extends Controller
         $user = $this->getUser();
         if($user->getRol() == "ROLE_ADMIN" ){
             $repository = $em->getRepository('AppBundle:Dispositivos');            
-            $list = $repository->findByTipo(3);
+            $list = $repository->findBy(
+            array('tipo' => 3),
+            array('nombre' => 'ASC'));
         }else{
             $repository = $em->getRepository('AppBundle:User_Device');                        
             $rules = $repository->findByCodigo($user->getCodigo());
             $repository = $em->getRepository('AppBundle:Dispositivos');
             $list = array();
+            
             foreach($rules as $rule){
-                $device = $repository->find($rule->getPin());
-                if($device->getTipo() == 3 ){
-                    $list[] = $device;
+                $device = $repository->findBy(
+                array('pin' => $rule->getPin()));
+                if($device[0]->getTipo() == 3 ){
+                    $list[] = $device[0];
                 }    
             }
         }
@@ -87,6 +91,10 @@ class DefaultController extends Controller
         $actual[$i] = 0;
         }  
     } 
+    
+     if(!isset($actual)){
+        $actual = [];
+        }  
         return array(
         'list' => $list,
         'state' => $actual,

@@ -28,7 +28,7 @@ class SecurityController extends Controller
 	 public function send($data,$graduate,$user,$limit,$activar)
     {
 		$sensores = array("Sensor de Humo", "Sensor de Movimiento #1", "Sensor de Movimiento #2");
-        $message = (new \Swift_Message('Informacion de la Ceremonia'))
+        $message = (new \Swift_Message('Informacion Sensores'))
         ->setFrom('horariotps@gmail.com')
         ->setTo($user->getEmail())
         ->setBody(
@@ -188,7 +188,7 @@ throw $this->createNotFoundException();
         $em->flush();
 
         $message = (new \Swift_Message('Reestablecer Contraseña'))
-        ->setFrom('srcgunivalle@gmail.com')
+        ->setFrom('horariotps@gmail.com')
         ->setTo($user->getEmail())
         ->setBody(
             $this->renderView(
@@ -307,11 +307,7 @@ $nueva = $encoder->encodePassword($usuario, $passN);
          return new RedirectResponse($this->generateUrl('login', array('message' => 'update')));
         }else{
 
-             if ($this->get('security.authorization_checker')->isGranted('ROLE_ADMIN')) {
-             return new RedirectResponse($this->generateUrl('adminPass', array('error' => 'fail')));
-             }else if ($this->get('security.authorization_checker')->isGranted('ROLE_USER')) {
-             return new RedirectResponse($this->generateUrl('graduatePass', array('error' => 'fail')));
-             }
+             return new RedirectResponse($this->generateUrl('passUpdate', array('error' => 'fail')));
 
         }
     }
@@ -323,7 +319,7 @@ $repository = $em->getRepository('AppBundle:Usuarios');
 $user = $repository->find($codigo);
 $user->setPassword($password);
 $user->setToken("");
-$user->setFechaLimite(\DateTime::createFromFormat('Y-m-d H:i','0000-00-00 00:00'));
+$user->setFechaLimite(null);
 $em->persist($user);
 $em->flush();
     }

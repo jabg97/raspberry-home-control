@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=GPIO_RESTART
+Exec=/home/pi/gpio_init.sh
+StartupNotify=false
+Terminal=true
+X-KeepTerminal=true

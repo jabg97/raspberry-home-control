@@ -20,7 +20,7 @@ $mail->Host = "smtp.gmail.com";
 $mail->Port = 465;
  
 $mail->Username = "horariotps@gmail.com";
-$mail->Password = "horariotps39";
+$mail->Password = "qzbqiioduhhiqhzj";
 $mail->From = "horariotps@gmail.com";
 $mail->FromName = "Servidor Sensores";
 $mail->Subject = $s." Activado";

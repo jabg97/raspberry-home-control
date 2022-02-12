@@ -16,9 +16,15 @@ Pagina principal
     <div class="container free-bird">
         <div class="row">
 
+{% if size >= 0 %}
 {% for i in range(0, size) %}
 {% include 'ControlBundle:Include:device.html.twig'  %} 
 {% endfor %}
+{% else %}
+<div class="alert bg-warning col-sm-8 col-xs-12 mx-auto float-xs-none text-white z-depth-5 hoverable py-2 px-2">
+    <center><strong> <i class='fa fa-1x fa-exclamation-triangle left'></i>&nbsp;&nbsp;Alerta!</strong> El usuario no tiene dispositivos asignados.</center></center>
+ </div>
+{% endif %}
 
  </div>
 </div>

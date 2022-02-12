@@ -92,7 +92,7 @@ class Usuarios implements UserInterface
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fechalimite", type="datetime", nullable=false)
+     * @ORM\Column(name="fechalimite", type="datetime", nullable=true)
      */
     private $fechalimite;
 
@@ -103,7 +103,7 @@ $this->email = $email;
 $this->plainPassword = $plainPassword;
 $this->rol = $rol;
 $this->token = "";
-$this->fechalimite = \DateTime::createFromFormat('Y-m-d H:i','0000-00-00 00:00');
+$this->fechalimite = null;
     }
 
 

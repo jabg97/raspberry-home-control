@@ -8,14 +8,6 @@ $(document).ready(function() {
         }
     });
 
-    $(".vacipass").keyup(function() {
-        this.value = this.value.replace(/[^A-Za-z0-9]/g, '');
-        if ($(this).val() != "") {
-            $(".error2").fadeOut('slow');
-            return false;
-        }
-    });
-
     $('.boton').click(function(e) {
         e.preventDefault();
         var user = $.trim($(".vaciuser").val());
