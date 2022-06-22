@@ -5,151 +5,167 @@ Pagina principal
 {% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css"  href="{{ asset('css/user/style.css') }}"/>
-<link rel="stylesheet" type="text/css"  href="{{ asset('css/user/toggle.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/user/style.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css/user/toggle.css') }}" />
 {% endblock %}
 
 {% block body %}
 {% include 'ControlBundle:Include:navegation.html.twig'  %}
- 
-<div class="administrator-header" ></div>
-    <div class="container free-bird">
-        <div class="row">
 
-{% if size >= 0 %}
-{% for i in range(0, size) %}
-{% include 'ControlBundle:Include:device.html.twig'  %} 
-{% endfor %}
-{% else %}
-<div class="alert bg-warning col-sm-8 col-xs-12 mx-auto float-xs-none text-white z-depth-5 hoverable py-2 px-2">
-    <center><strong> <i class='fa fa-1x fa-exclamation-triangle left'></i>&nbsp;&nbsp;Alerta!</strong> El usuario no tiene dispositivos asignados.</center></center>
- </div>
-{% endif %}
+<div class="administrator-header"></div>
+<div class="container free-bird">
+    <div class="row">
 
- </div>
+        {% if size >= 0 %}
+        {% for i in range(0, size) %}
+        {% include 'ControlBundle:Include:device.html.twig'  %}
+        {% endfor %}
+        {% else %}
+        <div class="alert bg-warning col-sm-8 col-xs-12 mx-auto float-xs-none text-white z-depth-5 hoverable py-2 px-2">
+            <center><strong> <i class='fa fa-1x fa-exclamation-triangle left'></i>&nbsp;&nbsp;Alerta!</strong> El
+                usuario no tiene dispositivos asignados.</center>
+            </center>
+        </div>
+        {% endif %}
+
+    </div>
 </div>
 
-{% endblock %}   
+{% endblock %}
 
 {% block javascripts %}
-<script type="text/javascript" src="{{ asset('js/user/toggle.js') }}" charset="utf-8"></script>             
+<script type="text/javascript" src="{{ asset('js/user/toggle.js') }}" charset="utf-8"></script>
 {#<script type="text/javascript" src="{{ asset('bundles/goswebsocket/js/gos_web_socket_client.js') }}" charset="utf-8"></script>
 <script type="text/javascript" src="{{ asset('bundles/goswebsocket/js/vendor/autobahn.min.js') }}" charset="utf-8"></script>#}
 <script type="text/javascript">
+    var global;
 
-var global;
-function enviar_ajax(log1,log2,signal){
-$.ajax({
-	url: "gpio/"+log1+"/"+log2+"/"+signal,
-	async: true,
-	success: function(respuesta) {
-		console.log("La orden ha sido enviada");
-	},
-	error: function() {
-          swal({
-  title: '¡Error de Conexion!',
-  text: "Intente desde otro navegador.",
-  type: 'error',
-  showCloseButton: true,
-  confirmButtonColor: '#D32F2F',
-  timer: 2500,
-  animation: false,
-  customClass: 'animated wobble'
-})
+    function enviar_ajax(id, dom_id, signal) {
+        $.ajax({
+            url: `gpio/${id}/${signal}`,
+            async: true,
+            success: function (respuesta) {
+                if (signal == "2") {
+                    $("#head_" + dom_id).addClass("header-primary");
+                    $("#head_" + dom_id).removeClass("header-danger");
+                } else if (signal == "3") {
+                    $("#head_" + dom_id).addClass("header-info");
+                    $("#head_" + dom_id).removeClass("header-danger");
+                } else {
+                    $("#head_" + dom_id).removeClass("header-primary");
+                    $("#head_" + dom_id).removeClass("header-info");
+                    $("#head_" + dom_id).addClass("header-danger");
+                }
+                console.log("La orden ha sido enviada");
+            },
+            error: function () {
+                swal({
+                    title: '¡Error de Conexion!',
+                    text: "Intente desde otro navegador.",
+                    type: 'error',
+                    showCloseButton: true,
+                    confirmButtonColor: '#D32F2F',
+                    timer: 2500,
+                    animation: false,
+                    customClass: 'animated wobble'
+                })
+            }
+        });
     }
-});
-}
 
-function enviar_ajax_id(log1,log2,id){
-var signal = $("#val"+id).val();
-$.ajax({
-	url: "gpio/"+log1+"/"+log2+"/"+signal,
-	async: true,
-	success: function(respuesta) {
-	if(signal == "0") {
-	$("#val"+id).val("1");
-	$("#head"+id).addClass("header-success");
-	$("#head"+id).removeClass("header-danger");
-	}else{
-	$("#val"+id).val("0");
-	$("#head"+id).removeClass("header-success");
-	$("#head"+id).addClass("header-danger");
-	}
-	
-		console.log("La orden ha sido enviada");
-	},
-	error: function() {
-          swal({
-  title: '¡Error de Conexion!',
-  text: "Intente desde otro navegador.",
-  type: 'error',
-  showCloseButton: true,
-  confirmButtonColor: '#D32F2F',
-  timer: 2500,
-  animation: false,
-  customClass: 'animated wobble'
-})
+    function enviar_ajax_id(id) {
+        let signal = $("#signal_val_" + id).val();
+        $.ajax({
+            url: `gpio/${id}/${signal}`,
+            async: true,
+            success: function (respuesta) {
+                if (signal == "0") {
+                    $("#val" + id).val("1");
+                    $("#head_" + id).addClass("header-success");
+                    $("#head_" + id).removeClass("header-danger");
+                } else {
+                    $("#val" + id).val("0");
+                    $("#head_" + id).removeClass("header-success");
+                    $("#head_" + id).addClass("header-danger");
+                }
+
+                console.log("La orden ha sido enviada");
+            },
+            error: function () {
+                swal({
+                    title: '¡Error de Conexion!',
+                    text: "Intente desde otro navegador.",
+                    type: 'error',
+                    showCloseButton: true,
+                    confirmButtonColor: '#D32F2F',
+                    timer: 2500,
+                    animation: false,
+                    customClass: 'animated wobble'
+                })
+            }
+        });
     }
-});
-}
 
-function enviar(log1,log2,signal){
-  try { 
-  global.publish("gpio/channel", {pin1: log1, pin2: log2, state : signal});
-     } catch(err) {
-      window.location.href ="gpio/"+log1+"/"+log2+"/"+signal;
+    function enviar(log1, log2, signal) {
+        try {
+            global.publish("gpio/channel", {
+                pin1: log1,
+                pin2: log2,
+                state: signal
+            });
+        } catch (err) {
+            window.location.href = "gpio/" + log1 + "/" + log2 + "/" + signal;
+        }
+        // result.dismiss can be 'cancel', 'overlay',
+        // 'close', and 'timer'
+
     }
-  // result.dismiss can be 'cancel', 'overlay',
-  // 'close', and 'timer'
+    /*
+    try { 
+            var websocket = WS.connect("ws://192.168.1.2:1997");
+            
+            websocket.on("socket/connect", function(session){
+            global = session;
+                session.subscribe("gpio/channel", function(uri, payload){
 
-}
-/*
-try { 
-        var websocket = WS.connect("ws://192.168.1.2:1997");
+                if(payload == "update"){
+             window.location.reload(true); 
+        }else{
         
-        websocket.on("socket/connect", function(session){
-        global = session;
-            session.subscribe("gpio/channel", function(uri, payload){
+     
+       }
+                });
 
-            if(payload == "update"){
-         window.location.reload(true); 
-    }else{
-    
- 
-   }
+                session.call("rpc/sum", {"term1": 2, "term2": 5}).then(
+                        function(result)
+                        {
+                            console.log("RPC Valid!", result);
+                        },
+                        function(error, desc)
+                        {
+                            console.log("RPC Error", error, desc);
+                        }
+                );
+                
             });
 
-            session.call("rpc/sum", {"term1": 2, "term2": 5}).then(
-                    function(result)
-                    {
-                        console.log("RPC Valid!", result);
-                    },
-                    function(error, desc)
-                    {
-                        console.log("RPC Error", error, desc);
-                    }
-            );
-            
-        });
+            websocket.on("socket/disconnect", function(error){
+                //error provides us with some insight into the disconnection: error.reason and error.code
 
-        websocket.on("socket/disconnect", function(error){
-            //error provides us with some insight into the disconnection: error.reason and error.code
-
-            console.log("Disconnected for " + error.reason + " with code " + error.code);
-        });
-         
-         } catch(err) {
-        swal({
-  title: '¡Error de Conexion!',
-  text: "Intente desde otro navegador.",
-  type: 'error',
-  showCloseButton: true,
-  confirmButtonColor: '#D32F2F',
-  timer: 2500,
-  animation: false,
-  customClass: 'animated wobble'
-})
-    }*/
-    </script>
+                console.log("Disconnected for " + error.reason + " with code " + error.code);
+            });
+             
+             } catch(err) {
+            swal({
+      title: '¡Error de Conexion!',
+      text: "Intente desde otro navegador.",
+      type: 'error',
+      showCloseButton: true,
+      confirmButtonColor: '#D32F2F',
+      timer: 2500,
+      animation: false,
+      customClass: 'animated wobble'
+    })
+        }*/
+</script>
 {% endblock %}
-  

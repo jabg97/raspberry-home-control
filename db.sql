@@ -29,6 +29,7 @@ CREATE TABLE `dispositivos` (
   `nombre` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `log` varchar(7) COLLATE utf8_unicode_ci NOT NULL,
   `tipo` smallint(5) unsigned NOT NULL,
+  `signal` smallint(5) unsigned NOT NULL,
   PRIMARY KEY (`pin`),
   UNIQUE KEY `UNIQ_5C1C5F523A909126` (`nombre`),
   UNIQUE KEY `UNIQ_5C1C5F528F3F68C5` (`log`)
@@ -41,7 +42,7 @@ CREATE TABLE `dispositivos` (
 
 LOCK TABLES `dispositivos` WRITE;
 /*!40000 ALTER TABLE `dispositivos` DISABLE KEYS */;
-INSERT INTO `dispositivos` VALUES ('21-:-22','Puerta','13-:-6',3),('22','Bombillo baño','6',0),('29','Zona de Iluminacion #1','21',3),('3','comedor','8',1),('3-:-5','Cortina #1','8-:-9',3),('31','Zona de Iluminacion #2','22',3),('32','Zona de Iluminacion #3','26',3),('33','Sensor de Humo','23',0),('35','Sensor de Movimiento #1','24',2),('36','Sensor de Movimiento #2','27',2),('37','Zona de Iluminacion #4','25',3),('38','Zona de Iluminacion #5','28',3),('40','Zona de Iluminacion #6','29',3),('5','sensor 1','9',1),('7','sensor 2','7',1),('7-:-8','Cortina #2','7-:-15',3);
+INSERT INTO `dispositivos` VALUES ('21-:-22','Puerta','13-:-6',3,1),('22','Bombillo baño','6',0,0),('29','Zona de Iluminacion #1','21',3,1),('3','comedor','8',1,1),('3-:-5','Cortina #1','8-:-9',3,1),('31','Zona de Iluminacion #2','22',3,1),('32','Zona de Iluminacion #3','26',3,1),('33','Sensor de Humo','23',0,1),('35','Sensor de Movimiento #1','24',2,1),('36','Sensor de Movimiento #2','27',2,1),('37','Zona de Iluminacion #4','25',3,1),('38','Zona de Iluminacion #5','28',3,1),('40','Zona de Iluminacion #6','29',3,1),('5','sensor 1','9',1,1),('7','sensor 2','7',1,1),('7-:-8','Cortina #2','7-:-15',3,1);
 /*!40000 ALTER TABLE `dispositivos` ENABLE KEYS */;
 UNLOCK TABLES;
 

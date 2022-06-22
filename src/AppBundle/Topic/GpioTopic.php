@@ -2,10 +2,10 @@
 
 namespace AppBundle\Topic;
 
+use Gos\Bundle\WebSocketBundle\Router\WampRequest;
 use Gos\Bundle\WebSocketBundle\Topic\TopicInterface;
 use Ratchet\ConnectionInterface;
 use Ratchet\Wamp\Topic;
-use Gos\Bundle\WebSocketBundle\Router\WampRequest;
 
 class GpioTopic implements TopicInterface
 {
@@ -51,47 +51,46 @@ class GpioTopic implements TopicInterface
     public function onPublish(ConnectionInterface $connection, Topic $topic, WampRequest $request, $event, array $exclude, array $eligible)
     {
         /*
-            $topic->getId() will contain the FULL requested uri, so you can proceed based on that
+        $topic->getId() will contain the FULL requested uri, so you can proceed based on that
 
-            if ($topic->getId() == "acme/channel/shout")
-               //shout something to all subs.
-        */
+        if ($topic->getId() == "acme/channel/shout")
+        //shout something to all subs.
+         */
 
-		
-$pin1 = $event["pin1"];
-$pin2 = $event["pin2"]; 
-$state = $event["state"];
+        $pin1 = $event["pin1"];
+        $pin2 = $event["pin2"];
+        $state = $event["state"];
 
-	if($state == 0 || $state == 1){
-		$comando = "gpio mode ".$pin1." out";
-	    exec($comando);
-        $comando = "gpio write ".$pin1." ".$state;
-	   	exec($comando);
-		$topic->broadcast("update");
-	}else if($state == 2){
-		$comando = "gpio mode ".$pin1." out";
-	    exec($comando);
-	    $comando = "gpio mode ".$pin2." out";
-	    exec($comando);
-        $comando = "gpio write ".$pin1." 1";
-		exec($comando);
-		$comando = "gpio write ".$pin2." 0";
-		exec($comando);
-	   	$topic->broadcast("update");
-	}else if($state == 3){
-		$comando = "gpio mode ".$pin1." out";
-	    exec($comando);
-	    $comando = "gpio mode ".$pin2." out";
-	    exec($comando);
-        $comando = "gpio write ".$pin1." 1";
-		exec($comando);
-		$comando = "gpio write ".$pin2." 1";
-		exec($comando);    
-	   	$topic->broadcast("update");
-	}else{
-        $topic->broadcast("no_change");
+        if ($state == 0 || $state == 1) {
+            $comando = "gpio mode " . $pin1 . " out";
+            exec($comando);
+            $comando = "gpio write " . $pin1 . " " . $state;
+            exec($comando);
+            $topic->broadcast("update");
+        } else if ($state == 2) {
+            $comando = "gpio mode " . $pin1 . " out";
+            exec($comando);
+            $comando = "gpio mode " . $pin2 . " out";
+            exec($comando);
+            $comando = "gpio write " . $pin1 . " 1";
+            exec($comando);
+            $comando = "gpio write " . $pin2 . " 0";
+            exec($comando);
+            $topic->broadcast("update");
+        } else if ($state == 3) {
+            $comando = "gpio mode " . $pin1 . " out";
+            exec($comando);
+            $comando = "gpio mode " . $pin2 . " out";
+            exec($comando);
+            $comando = "gpio write " . $pin1 . " 1";
+            exec($comando);
+            $comando = "gpio write " . $pin2 . " 1";
+            exec($comando);
+            $topic->broadcast("update");
+        } else {
+            $topic->broadcast("no_change");
+        }
     }
-}
     /**
      * Like RPC is will use to prefix the channel
      * @return string

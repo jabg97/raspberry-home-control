@@ -5,107 +5,129 @@ Reestablecer Contrase&ntilde;a
 {% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css"  href="{{ asset('css/login/style.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/login/style.css') }}" />
 {% endblock %}
 
 {% block body %}
 
 
-<div class="reset-header" ></div>
+<div class="reset-header"></div>
 
-    <div class="container free-bird">
-        <div class="row">
-<div class="card col-md-10 col-lg-10 col-sm-10 mx-auto float-xs-none white z-depth-5 hoverable py-2 px-2">
- <div class="card-block" >
+<div class="container free-bird">
+    <div class="row">
+        <div class="card col-md-10 col-lg-10 col-sm-10 mx-auto float-xs-none white z-depth-5 hoverable py-2 px-2">
+            <div class="card-block">
 
-     <form id="formu" action="{{ path('resetPassword') }}" method="POST">
-        <div class="form-header red darken-3 z-depth-5 hoverable">
-            <h3><i class="fa fa-lock"></i><strong> Reestablecer Contrase&ntilde;a</strong></h3>
+                <form id="formu" action="{{ path('resetPassword') }}" method="POST">
+                    <div class="form-header red darken-3 z-depth-5 hoverable">
+                        <h3><i class="fa fa-lock"></i><strong> Reestablecer Contrase&ntilde;a</strong></h3>
+                    </div>
+
+                    {% if token %}
+
+                    {% if error == "end" %}
+                    <div class="md-form error_div">
+                        <i class="fa fa-user-circle prefix"></i>
+                        <input type="text" id="codigo" disabled required class="form-control validate codigo"
+                            name="codigo" value="{{ codigo }}" pattern="[a-z0-9]{5,9}" title="Usuario: {{ codigo }}">
+                        <label for="codigo" data-error="Incorrecto" data-success="Correcto">Usuario</label>
+                    </div>
+                    <br>
+                    <div class='error alert bg-warning waves-effect text-white z-depth-4 hoverable imenn'>
+                        <center><strong> <i
+                                    class='fa fa-1x fa-exclamation-triangle left'></i>&nbsp;&nbsp;Alerta!</strong> El
+                            tiempo maximo para reestablecer la contraseña ha expirado
+                            ({{ tiempo|date('d-m-Y h:i A') }}).</center>
+                    </div>
+                    {% else %}
+                    <input type="hidden" readonly required id="token" class="form-control validate token"
+                        value="{{token}}" name="token" title="Ingrese el Token">
+
+                    <div class="md-form error_div">
+                        <i class="fa fa-user-circle prefix"></i>
+                        <input type="text" id="codigo" disabled required class="form-control validate codigo"
+                            name="codigo" value="{{ codigo }}" pattern="[a-z0-9]{5,9}" title="Usuario: {{ codigo }}">
+                        <label for="codigo" data-error="Incorrecto" data-success="Correcto">Usuario</label>
+                    </div>
+                    <br>
+                    <div class="md-form error2_div">
+                        <i class="fa fa-unlock-alt prefix"></i>
+                        <input type="password" id="passN" required class="form-control validate vacipassN" name="passN">
+                        <label for="password" data-error="Incorrecto" data-success="Correcto">Nueva
+                            contrase&ntilde;a</label>
+                    </div>
+                    <br>
+                    <div class="md-form error3_div">
+                        <i class="fa fa-unlock prefix"></i>
+                        <input type="password" id="passR" required class="form-control validate vacipassR" name="passR">
+                        <label for="password" data-error="Incorrecto" data-success="Correcto">Repetir
+                            contrase&ntilde;a</label>
+                    </div>
+
+                    <div class="form-inline">
+                        <div class="md-form form-group">
+                            <div class="text-xs-center">
+                                <button class="btn btn-danger btn-lg boton waves-effect hoverable" type="submit"><i
+                                        class="fa fa-key left"></i>Reestablecer Contrase&ntilde;a</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="error4_div form-group"> </div>
+
+                {% if error == "error" %}
+                <div class='error alert bg-danger waves-effect text-white z-depth-4 hoverable imenn'> <span
+                        class="close" data-dismiss="alert" aria-label="close">&times;</span>
+                    <center><strong> <i class='fa fa-1x fa-exclamation-circle left'></i>&nbsp;&nbsp;Error!</strong> Por
+                        favor ingrese todos los campos con una longitud entre 6 y 20 caracteres.</center>
+                </div>
+                {% endif %}
+
+
+                {% if error == "different" %}
+                <div class='error3 alert bg-warning waves-effect text-white z-depth-4 hoverable imenn'> <span
+                        class="close" data-dismiss="alert" aria-label="close">&times;</span>
+                    <center><strong> <i class='fa fa-1x fa-exclamation-triangle left'></i>&nbsp;&nbsp;Alerta!</strong>
+                        La contrase&ntilde;a no coincide.</center>
+                </div>
+                {% endif %}
+                {% endif %}
+                {% else %}
+                <div class='error alert bg-danger waves-effect text-white z-depth-4 hoverable imenn'>
+                    <center><strong> <i class='fa fa-1x fa-exclamation-circle left'></i>&nbsp;&nbsp;Error!</strong> La
+                        solicitud es incorrecta.</center>
+                </div>
+
+                {% endif %}
+
+            </div>
+
         </div>
- 
-{% if token %}
-
-{% if error == "end" %}
-<div class="md-form error_div">
-            <i class="fa fa-user-circle prefix"></i>
-            <input type="text" id="codigo" disabled required class="form-control validate codigo"  name="codigo" value="{{ codigo }}" pattern="[a-z0-9]{5,9}" title="Usuario: {{ codigo }}">
-            <label for="codigo" data-error="Incorrecto" data-success="Correcto">Usuario</label>
-        </div>
-<br>
-       <div class='error alert bg-warning waves-effect text-white z-depth-4 hoverable imenn'><center><strong> <i class='fa fa-1x fa-exclamation-triangle left'></i>&nbsp;&nbsp;Alerta!</strong> El tiempo maximo para reestablecer la contraseña ha expirado ({{ tiempo|date('d-m-Y h:i A') }}).</center></div>
- {% else %}
-            <input type="hidden" readonly required id="token" class="form-control validate token" value="{{token}}"  name="token"  title="Ingrese el Token">
-
-         <div class="md-form error_div">
-            <i class="fa fa-user-circle prefix"></i>
-            <input type="text" id="codigo" disabled required class="form-control validate codigo"  name="codigo" value="{{ codigo }}" pattern="[a-z0-9]{5,9}" title="Usuario: {{ codigo }}">
-            <label for="codigo" data-error="Incorrecto" data-success="Correcto">Usuario</label>
-        </div>
-<br>
-        <div class="md-form error2_div">
-            <i class="fa fa-unlock-alt prefix"></i>
-            <input type="password" id="passN" required class="form-control validate vacipassN"  name="passN">
-            <label for="password" data-error="Incorrecto" data-success="Correcto">Nueva contrase&ntilde;a</label>
-        </div>
-<br>
-            <div class="md-form error3_div">
-            <i class="fa fa-unlock prefix"></i>
-            <input type="password" id="passR" required class="form-control validate vacipassR"  name="passR">
-            <label for="password" data-error="Incorrecto" data-success="Correcto">Repetir contrase&ntilde;a</label>
-        </div>
-
-        <div class="form-inline">
-<div class="md-form form-group">
-        <div class="text-xs-center">
-            <button class="btn btn-danger btn-lg boton waves-effect hoverable" type="submit"><i class="fa fa-key left"></i>Reestablecer Contrase&ntilde;a</button>
-        </div>
-        </div>
-        </div>
-     </form>
-
-  <div class="error4_div form-group">	</div>	
-
-	{% if error == "error" %}
-       <div class='error alert bg-danger waves-effect text-white z-depth-4 hoverable imenn'> <span  class="close" data-dismiss="alert" aria-label="close">&times;</span><center><strong> <i class='fa fa-1x fa-exclamation-circle left'></i>&nbsp;&nbsp;Error!</strong> Por favor ingrese todos los campos con una longitud entre 6 y 20 caracteres.</center></div>
-                        {% endif %}
-
-
-{% if error == "different" %}
-<div class='error3 alert bg-warning waves-effect text-white z-depth-4 hoverable imenn'> <span  class="close" data-dismiss="alert" aria-label="close">&times;</span><center><strong> <i class='fa fa-1x fa-exclamation-triangle left'></i>&nbsp;&nbsp;Alerta!</strong> La contrase&ntilde;a no coincide.</center></div> 
-{% endif %}
-           {% endif %}            
-                        {% else %}
-       <div class='error alert bg-danger waves-effect text-white z-depth-4 hoverable imenn'><center><strong> <i class='fa fa-1x fa-exclamation-circle left'></i>&nbsp;&nbsp;Error!</strong> La solicitud es incorrecta.</center></div>
-   
-    {% endif %}
-  
-        </div>
-
-    </div>
-    </div>
     </div>
 </div>
-    {% include 'AppBundle:Security:alert.html.twig' %}
-{% endblock %}         
+</div>
+{% include 'AppBundle:Security:alert.html.twig' %}
+{% endblock %}
 {% block javascripts %}
 <script type="text/javascript" src="{{ asset('js/security/reset.js') }}" charset="utf-8"></script>
 <script type="text/javascript" charset="utf-8">
-var  token="{{ token }}";
-if(token == ""){
-    $("#mensaje_disabled").modal('show');
-  }else{ 
-       var  error="{{ error }}";
-     if(error == "error"){
-$("#mensaje_error").modal('show');
-     }
-      if(error == "end"){
-$("#mensaje_end").modal('show');
-     }
-     if(error == "different"){
- $("#mensaje_different").modal('show');
-      }
-   
-     }
-      </script>
-    
-{% endblock %}         
+    var token = "{{ token }}";
+    if (token == "") {
+        $("#mensaje_disabled").modal('show');
+    } else {
+        var error = "{{ error }}";
+        if (error == "error") {
+            $("#mensaje_error").modal('show');
+        }
+        if (error == "end") {
+            $("#mensaje_end").modal('show');
+        }
+        if (error == "different") {
+            $("#mensaje_different").modal('show');
+        }
+
+    }
+</script>
+
+{% endblock %}

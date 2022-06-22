@@ -265,6 +265,10 @@
        background: linear-gradient(to bottom, #142b3b 0%, #142b3b 54%, #20455e 100%) !important;
        filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#142b3b', endColorstr='#20455e', GradientType=0);
    }
+
+   .dark-header tr th a{
+    color: #ffffff !important;
+}
    
    .dark-icon {
        color: #142b3b !important;

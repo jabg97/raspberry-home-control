@@ -2,9 +2,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
@@ -16,14 +16,14 @@ class Usuarios implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=100, unique=true, nullable=false)
-      
-    * @Assert\NotBlank(
+
+     * @Assert\NotBlank(
      *     message="El email no puede estar vacio."
      * )
      * @Assert\NotNull(
      *     message="El email no puede estar vacio."
      * )
-      * @Assert\Email(
+     * @Assert\Email(
      *     message = "El email '{{ value }}' no tiene un formato valido."
      * )
      */
@@ -37,7 +37,7 @@ class Usuarios implements UserInterface
      * @Assert\NotNull(
      *     message="El codigo de usuario no puede estar vacio."
      * )
-    * @Assert\Length(
+     * @Assert\Length(
      *      min = 1,
      *      max = 20,
      *      minMessage = "El usuario debe tener minimo {{ limit }} caracteres",
@@ -58,7 +58,7 @@ class Usuarios implements UserInterface
     protected $rol;
 
     /**
-    * @Assert\NotBlank(
+     * @Assert\NotBlank(
      *     message="La contraseña no puede estar vacio."
      * )
      * @Assert\NotNull(
@@ -70,7 +70,7 @@ class Usuarios implements UserInterface
      *      minMessage = "La contraseña debe tener minimo {{ limit }} caracteres",
      *      maxMessage = "La contraseña debe tener maximo {{ limit }} caracteres"
      * )
- * @Assert\Regex(
+     * @Assert\Regex(
      *     pattern="/^[A-Za-z0-9]+$/",
      *     match=true,
      *     message="La contraseña tiene un formato invalido"
@@ -96,16 +96,15 @@ class Usuarios implements UserInterface
      */
     private $fechalimite;
 
-public function create ($codigo,$email,$plainPassword,$rol)
+    public function create($codigo, $email, $plainPassword, $rol)
     {
-$this->codigo = $codigo;
-$this->email = $email;
-$this->plainPassword = $plainPassword;
-$this->rol = $rol;
-$this->token = "";
-$this->fechalimite = null;
+        $this->codigo = $codigo;
+        $this->email = $email;
+        $this->plainPassword = $plainPassword;
+        $this->rol = $rol;
+        $this->token = "";
+        $this->fechalimite = null;
     }
-
 
     public function setFechalimite($fechalimite)
     {
@@ -114,12 +113,10 @@ $this->fechalimite = null;
         return $this;
     }
 
-    
     public function getFechalimite()
     {
         return $this->fechalimite;
     }
-
 
     public function eraseCredentials()
     {
@@ -140,7 +137,6 @@ $this->fechalimite = null;
     {
         return [$this->getRol()];
     }
-
 
     public function setCodigo($codigo)
     {
@@ -196,7 +192,6 @@ $this->fechalimite = null;
     {
         $this->plainPassword = $plainPassword;
     }
-
 
     public function getSalt()
     {

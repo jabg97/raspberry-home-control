@@ -2,9 +2,9 @@
 
 namespace AppBundle\Rpc;
 
-use Ratchet\ConnectionInterface;
-use Gos\Bundle\WebSocketBundle\RPC\RpcInterface;
 use Gos\Bundle\WebSocketBundle\Router\WampRequest;
+use Gos\Bundle\WebSocketBundle\RPC\RpcInterface;
+use Ratchet\ConnectionInterface;
 
 class GpioRpc implements RpcInterface
 {

@@ -5,126 +5,137 @@ Gestión de Usuarios
 {% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" type="text/css"  href="{{ asset('css/user/style.css') }}"/>
-<link rel="stylesheet" type="text/css"  href="{{ asset('css/chosen/chosen.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/user/style.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('css/chosen/chosen.css') }}" />
 {% endblock %}
 
 {% block body %}
 
- {% include 'ControlBundle:Include:navegation.html.twig'  %}
+{% include 'ControlBundle:Include:navegation.html.twig'  %}
 
-<div class="administrator-header" ></div>
-    <div class="container free-bird">
-        <div class="row">
-
-<div class="card col-md-12 col-lg-12 col-sm-12 mx-auto float-xs-none white z-depth-5 hoverable py-2 px-2">
-    <div class="card-block" >
-      
- <div class="form-header red darken-3 z-depth-5 hoverable">
-            <h3><i class="fa fa-users"></i><strong> Gestión de Usuarios</strong></h3>
-        </div>
-<center>
-
-  <div class="col-md-11 col-lg-11 col-sm-11 col-xs-11">
-
-<div class="table-responsive table-hover table-striped">
-<table class="table" id="users-table">
-    <thead class="dark-header">
-        <tr>
-             <th>{{ knp_pagination_sortable(pagination, 'Usuario', 'user.codigo') }}</th>
-            
-            <th {% if pagination.isSorted('user.email') %} class="sorted"{% endif %}>
-                {{ knp_pagination_sortable(pagination, 'Email', 'user.email') }}
-            </th>
-
-            <th {% if pagination.isSorted('user.rol') %} class="sorted"{% endif %}>
-                {{ knp_pagination_sortable(pagination, 'Rol', 'user.rol') }}
-            </th>
-
-            <th>Acciones</th>
-        </tr>
-    </thead>
-    <tbody> 
-    {% for user in pagination %}
-        <tr>
-            <td scope="row"><strong>{{ user.codigo }}</strong></td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.rol }}</td>
-        </tr>
-
-{% endfor %}
-
-    </tbody>
-</table>
-</div>
-<br/>
- <div class="row">
- <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
-<div class="navigation">
-        {{ knp_pagination_render(pagination) }}
-    </div>
-     </div>
-     <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
-     <h4> <span class="badge special-color-dark" style="float:right;">
-            Cantidad de Usuarios: {{ pagination.getTotalItemCount }}
-        </span> </h4>
-        </div>
-        </div>
-
-<br/><br/>
-
+<div class="administrator-header"></div>
+<div class="container free-bird">
   <div class="row">
 
+    <div class="card col-md-12 col-lg-12 col-sm-12 mx-auto float-xs-none white z-depth-5 hoverable py-2 px-2">
+      <div class="card-block">
 
-  <div class="col-md-12 col-lg-12">
-<div class="card z-depth-4 hoverable">
-    <div class="card-header dark-header white-text z-depth-4 hoverable">
-       <i class="fa fa-user-plus left lead"></i><strong> Registrar Usuario</strong>
+        <div class="form-header red darken-3 z-depth-5 hoverable">
+          <h3><i class="fa fa-users"></i><strong> Gestión de Usuarios</strong></h3>
+        </div>
+        <center>
+
+          <div class="col-md-11 col-lg-11 col-sm-11 col-xs-11">
+
+            <div class="table-responsive table-hover table-striped">
+              <table class="table" id="users-table">
+                <thead class="dark-header">
+                  <tr>
+                    <th>{{ knp_pagination_sortable(pagination, 'Usuario', 'user.codigo') }}</th>
+
+                    <th {% if pagination.isSorted('user.email') %} class="sorted" {% endif %}>
+                      {{ knp_pagination_sortable(pagination, 'Email', 'user.email') }}
+                    </th>
+
+                    <th {% if pagination.isSorted('user.rol') %} class="sorted" {% endif %}>
+                      {{ knp_pagination_sortable(pagination, 'Rol', 'user.rol') }}
+                    </th>
+
+                    <th>Acciones</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for user in pagination %}
+                  <tr>
+                    <td scope="row"><strong>{{ user.codigo }}</strong></td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.rol }}</td>
+                  </tr>
+
+                  {% endfor %}
+
+                </tbody>
+              </table>
+            </div>
+            <br />
+            <div class="row">
+              <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                <div class="navigation">
+                  {{ knp_pagination_render(pagination) }}
+                </div>
+              </div>
+              <div class="col-md-6 col-lg-6 col-sm-6 col-xs-6">
+                <h4> <span class="badge special-color-dark" style="float:right;">
+                    Cantidad de Usuarios: {{ pagination.getTotalItemCount }}
+                  </span> </h4>
+              </div>
+            </div>
+
+            <br /><br />
+
+            <div class="row">
+
+
+              <div class="col-md-12 col-lg-12">
+                <div class="card z-depth-4 hoverable">
+                  <div class="card-header dark-header white-text z-depth-4 hoverable">
+                    <i class="fa fa-user-plus left lead"></i><strong> Registrar Usuario</strong>
+                  </div>
+                  <div class="card-block">
+                    <h5 class="card-title">Ingresar los datos para registrar un nuevo usuario.</h5>
+
+                    <div class="div_insert">
+                      <button class="btn btn-lg  btn-unique waves-light hoverable" data-toggle="modal"
+                        data-target="#mensaje_registrar"><i class='fa fa-user-plus left'></i> Registrar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <br><br>
+            <div class="row">
+              <div class="col-md-12 col-lg-12">
+
+                {% if message == "success" %}
+                <div class='error alert bg-success waves-effect text-white z-depth-4 hoverable imenn'> <span
+                    class="close" data-dismiss="alert" aria-label="close">&times;</span>
+                  <center><strong> <i class='fa fa-1x fa-check left'></i>&nbsp;&nbsp;Exito!</strong> Los cambios fueron
+                    efectuados.</center>
+                </div>
+                {% endif %}
+
+                {% if errors %}
+                <div class='error alert alert-info waves-effect text-muted z-depth-5 hoverable'>
+                  <span class="close" data-dismiss="alert" aria-label="close">&times;</span>
+                  <div id='todo'>
+                    <center>
+                      {% if message == "error" %}
+
+                      {% for exception in errors %}
+                      <span class="imen"> <strong><i
+                            class='fa fa-1x fa-exclamation-circle left'></i>&nbsp;&nbsp;Error!</strong>
+                        {{exception.message}}</span><br>
+                      {% endfor %}
+                      {% endif %}
+                    </center>
+                  </div>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+
+          </div>
+
+      </div>
     </div>
-    <div class="card-block">
-        <h5 class="card-title">Ingresar los datos para registrar un nuevo usuario.</h5>
-
-  <div class="div_insert">
-        <button class="btn btn-lg  btn-unique waves-light hoverable" data-toggle="modal" data-target="#mensaje_registrar"><i class='fa fa-user-plus left'></i> Registrar</button>
+  </div>
 </div>
-    </div>
-</div>
-</div></div>
-
-
-<br><br>
-<div class="row">
-<div class="col-md-12 col-lg-12">
-
-{% if message == "success" %}
-<div class='error alert bg-success waves-effect text-white z-depth-4 hoverable imenn'> <span  class="close" data-dismiss="alert" aria-label="close">&times;</span><center><strong> <i class='fa fa-1x fa-check left'></i>&nbsp;&nbsp;Exito!</strong> Los cambios fueron efectuados.</center></div>
-{% endif %}
-
-{% if errors %}
-<div class='error alert alert-info waves-effect text-muted z-depth-5 hoverable'>
- <span  class="close" data-dismiss="alert" aria-label="close">&times;</span>
- <div  id='todo'>
-       <center>
-       {% if message == "error" %}
-
-{% for exception in errors %}
-   <span class="imen"> <strong><i class='fa fa-1x fa-exclamation-circle left'></i>&nbsp;&nbsp;Error!</strong> {{exception.message}}</span><br>
-{% endfor %}
-{% endif %}
-</center></div></div>
-{% endif %}
-</div></div>
-
-</div>
- 
-    </div>
-    </div>
-</div>
- </div>
 </div>
 
- {% include 'ControlBundle:Include:alertUser.html.twig'  %}
- {% endblock %}   
+{% include 'ControlBundle:Include:alertUser.html.twig'  %}
+{% endblock %}
 
 {% block javascripts %}
 <script type="text/javascript" src="{{ asset('js/admin/jquery.tabledit.js') }}" charset="utf-8"></script>
@@ -132,17 +143,17 @@ Gestión de Usuarios
 <script type="text/javascript" src="{{ asset('js/admin/chosen/chosen.jquery.js') }}" charset="utf-8"></script>
 
 <script type="text/javascript" charset="utf-8">
-var  message="{{ message }}";
+  var message = "{{ message }}";
 
 
-if(message == "success"){
-$("#mensaje_success").modal('show');
-     }
+  if (message == "success") {
+    $("#mensaje_success").modal('show');
+  }
 
-if(message == "error"){
-$('#mensajes').focus().html("<font class='text-muted'>"+ $('#todo').html()+"</font><br>"); 
-$("#mensaje_validation").modal('show');
-     }
+  if (message == "error") {
+    $('#mensajes').focus().html("<font class='text-muted'>" + $('#todo').html() + "</font><br>");
+    $("#mensaje_validation").modal('show');
+  }
 
 
   $("#rol").chosen({
@@ -152,120 +163,126 @@ $("#mensaje_validation").modal('show');
 
 
 
-$('#users-table').Tabledit({
+  $('#users-table').Tabledit({
 
-columns: {
-  identifier: [0, 'codigo'],                    
-  editable: [[1, 'email'],  [2, 'rol','[{"id":"ROLE_USER","data":"ROLE_USER"},{"id":"ROLE_ADMIN","data":"ROLE_ADMIN"}]']]
-},
-
-// link to server script
-// e.g. 'ajax.php'
-url: "{{ path('updateUser') }}",
-
-// class for form inputs
-inputClass: 'form-control validate inputp',
-
-// // class for toolbar
-toolbarClass: 'btn-toolbar',
-
-// class for buttons group
-groupClass: 'btn-group',
-
-// class for row when ajax request fails
-dangerClass: 'danger',
-
-// class for row when save changes
-warningClass: 'warning',
-
-// class for row when is removed
-mutedClass: 'text-muted',
-
-// trigger to change for edit mode.
-// e.g. 'dblclick'
-eventType: 'click',
-
-// change the name of attribute in td element for the row identifier
-rowIdentifier: 'codigo',
-
-// activate focus on first input of a row when click in save button
-autoFocus: true,
-
-// hide the column that has the identifier
-hideIdentifier: false,
-
-// activate edit button instead of spreadsheet style
-editButton: true,
-
-// activate delete button
-deleteButton: true,
-
-// activate save button when click on edit button
-saveButton: true,
-
-// activate restore button to undo delete action
-restoreButton: false,
-
-// custom action buttons
-buttons: {
-  edit: {
-    class: 'btn btn-unique btn-sm botonp waves-light waves-effect hoverable',
-    html: '<i class="fa fa-pencil left"></i>Editar',
-    action: 'edit'
-  },
-  delete: {
-    class: 'btn btn-danger btn-sm botonp waves-effect hoverable',
-    html: '<i class="fa fa-remove left"></i>Borrar',
-    action: 'delete'
-  },
-  save: {
-    class: 'btn btn-teal btn-sm botonp waves-effect hoverable',
-    html: '<i class="fa fa-save left"></i>Guardar'
-  },
-
-  confirm: {
-    class: 'btn btn-amber btn-sm botonp waves-effect hoverable',
-    html: '<i class="fa fa-exclamation-triangle left"></i>Continuar'
-  }
-},
-
-// executed after draw the structure
-onDraw: function() { return; },
-
-// executed when the ajax request is completed
-// onSuccess(data, textStatus, jqXHR)
-onSuccess: function(data, textStatus, jqXHR) { 
-    if(data[0]== 'fail'){
-$('#muf').focus().html(data[1]); 
-$("#mensaje_updatefail").modal('show');
-    }else if(data[0]== 'success'){
-$('#mus').focus().html(data[1]); 
-$("#mensaje_updatesuccess").modal('show');
-    }else{
-    $('#mus').focus().html(textStatus); 
-$("#mensaje_updatesuccess").modal('show');
-    }
-    return; 
+    columns: {
+      identifier: [0, 'codigo'],
+      editable: [
+        [1, 'email'],
+        [2, 'rol', '[{"id":"ROLE_USER","data":"ROLE_USER"},{"id":"ROLE_ADMIN","data":"ROLE_ADMIN"}]']
+      ]
     },
 
-// executed when occurred an error on ajax request
-// onFail(jqXHR, textStatus, errorThrown)
-onFail: function(jqXHR, textStatus, errorThrown) {
-     $('#msf').focus().html("Error! "+errorThrown); 
-$("#mensaje_sendfail").modal('show');
-     return; 
-     },
+    // link to server script
+    // e.g. 'ajax.php'
+    url: "{{ path('updateUser') }}",
 
-// executed whenever there is an ajax request
-onAlways: function() { return; },
+    // class for form inputs
+    inputClass: 'form-control validate inputp',
 
-// executed before the ajax request
-// onAjax(action, serialize)
-onAjax: function() { return; }
+    // // class for toolbar
+    toolbarClass: 'btn-toolbar',
 
-});
+    // class for buttons group
+    groupClass: 'btn-group',
 
+    // class for row when ajax request fails
+    dangerClass: 'danger',
 
+    // class for row when save changes
+    warningClass: 'warning',
+
+    // class for row when is removed
+    mutedClass: 'text-muted',
+
+    // trigger to change for edit mode.
+    // e.g. 'dblclick'
+    eventType: 'click',
+
+    // change the name of attribute in td element for the row identifier
+    rowIdentifier: 'codigo',
+
+    // activate focus on first input of a row when click in save button
+    autoFocus: true,
+
+    // hide the column that has the identifier
+    hideIdentifier: false,
+
+    // activate edit button instead of spreadsheet style
+    editButton: true,
+
+    // activate delete button
+    deleteButton: true,
+
+    // activate save button when click on edit button
+    saveButton: true,
+
+    // activate restore button to undo delete action
+    restoreButton: false,
+
+    // custom action buttons
+    buttons: {
+      edit: {
+        class: 'btn btn-unique btn-sm botonp waves-light waves-effect hoverable',
+        html: '<i class="fa fa-pencil left"></i>Editar',
+        action: 'edit'
+      },
+      delete: {
+        class: 'btn btn-danger btn-sm botonp waves-effect hoverable',
+        html: '<i class="fa fa-remove left"></i>Borrar',
+        action: 'delete'
+      },
+      save: {
+        class: 'btn btn-teal btn-sm botonp waves-effect hoverable',
+        html: '<i class="fa fa-save left"></i>Guardar'
+      },
+
+      confirm: {
+        class: 'btn btn-amber btn-sm botonp waves-effect hoverable',
+        html: '<i class="fa fa-exclamation-triangle left"></i>Continuar'
+      }
+    },
+
+    // executed after draw the structure
+    onDraw: function () {
+      return;
+    },
+
+    // executed when the ajax request is completed
+    // onSuccess(data, textStatus, jqXHR)
+    onSuccess: function (data, textStatus, jqXHR) {
+      if (data[0] == 'fail') {
+        $('#muf').focus().html(data[1]);
+        $("#mensaje_updatefail").modal('show');
+      } else if (data[0] == 'success') {
+        $('#mus').focus().html(data[1]);
+        $("#mensaje_updatesuccess").modal('show');
+      } else {
+        $('#mus').focus().html(textStatus);
+        $("#mensaje_updatesuccess").modal('show');
+      }
+      return;
+    },
+
+    // executed when occurred an error on ajax request
+    // onFail(jqXHR, textStatus, errorThrown)
+    onFail: function (jqXHR, textStatus, errorThrown) {
+      $('#msf').focus().html("Error! " + errorThrown);
+      $("#mensaje_sendfail").modal('show');
+      return;
+    },
+
+    // executed whenever there is an ajax request
+    onAlways: function () {
+      return;
+    },
+
+    // executed before the ajax request
+    // onAjax(action, serialize)
+    onAjax: function () {
+      return;
+    }
+
+  });
 </script>
 {% endblock %}
-  

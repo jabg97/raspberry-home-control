@@ -1,18 +1,17 @@
 <?php
 namespace AppBundle\Service;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Guard\Authenticator\AbstractFormLoginAuthenticator;
-use Symfony\Component\Security\Core\Security;
 
 class FormLoginAuthenticator extends AbstractFormLoginAuthenticator
 {
@@ -28,7 +27,7 @@ class FormLoginAuthenticator extends AbstractFormLoginAuthenticator
     public function getCredentials(Request $request)
     {
         if ($request->getPathInfo() != '/login_check') {
-          return;
+            return;
         }
 
         $username = trim($request->request->get('_username'));
@@ -67,11 +66,11 @@ class FormLoginAuthenticator extends AbstractFormLoginAuthenticator
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
-       $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
+        $request->getSession()->set(Security::AUTHENTICATION_ERROR, $exception);
 
-       $url = $this->router->generate('home');
+        $url = $this->router->generate('home');
 
-       return new RedirectResponse($url);
+        return new RedirectResponse($url);
     }
 
     protected function getLoginUrl()

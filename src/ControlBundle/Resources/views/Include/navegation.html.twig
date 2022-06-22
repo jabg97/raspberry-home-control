@@ -1,72 +1,83 @@
 <nav class="navbar hoverable navbar-toggleable-md navbar-light fixed-top scrolling-navbar">
-        <div class="container">          
-            <span class="navbar-brand">
-                <img src="{{ asset('img/general/logo.png') }}" class="img-fluid logouni" alt="logo"/>
-            </span>
-<button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1" aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse" id="navbarNav1">
-            <ul class="navbar-nav mr-auto">
-           {% if app.request.get('_route') == 'home' %}
-                <li class="nav-item waves-effect active ">
-                    <a class="nav-link waves-effect" style="color: black;cursor: default;"><i class="fa fa-home left"></i>&nbsp;Pagina Principal</a>
-                </li>
-                {% else %}
-                <li class="nav-item waves-effect">
-                    <a class="nav-link waves-effect" href="{{ path('home') }}"><i class="fa fa-home left"></i>&nbsp;Pagina Principal</a>
-                </li>
-                {% endif %}
-{% if is_granted('ROLE_ADMIN') %}
+  <div class="container">
+    <span class="navbar-brand">
+      <img src="{{ asset('img/general/logo.png') }}" class="img-fluid logouni" alt="logo" />
+    </span>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav1"
+      aria-controls="navbarNav1" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-                 {% if app.request.get('_route') == 'adminUsers' %}
-                <li class="nav-item waves-effect active ">
-                  <a class="nav-link waves-effect" style="color: black;cursor: default;"><i class="fa fa-users left"></i>&nbsp;Usuarios</a>
-                </li>
+    <div class="collapse navbar-collapse" id="navbarNav1">
+      <ul class="navbar-nav mr-auto">
+        {% if app.request.get('_route') == 'home' %}
+        <li class="nav-item waves-effect active ">
+          <a class="nav-link waves-effect" style="color: black;cursor: default;"><i
+              class="fa fa-home left"></i>&nbsp;Pagina Principal</a>
+        </li>
+        {% else %}
+        <li class="nav-item waves-effect">
+          <a class="nav-link waves-effect" href="{{ path('home') }}"><i class="fa fa-home left"></i>&nbsp;Pagina
+            Principal</a>
+        </li>
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN') %}
+
+        {% if app.request.get('_route') == 'adminUsers' %}
+        <li class="nav-item waves-effect active ">
+          <a class="nav-link waves-effect" style="color: black;cursor: default;"><i
+              class="fa fa-users left"></i>&nbsp;Usuarios</a>
+        </li>
+        {% else %}
+        <li class="nav-item waves-effect">
+          <a class="nav-link waves-effect" href="{{ path('adminUsers') }}"><i
+              class="fa fa-users left"></i>&nbsp;Usuarios</a>
+        </li>
+        {% endif %}
+        {% if app.request.get('_route') == 'adminDevices' %}
+        <li class="nav-item waves-effect active ">
+          <a class="nav-link waves-effect" style="color: black;cursor: default;"><i
+              class="fa fa-microchip left"></i>&nbsp;Dispositivos</a>
+        </li>
+        {% else %}
+        <li class="nav-item waves-effect">
+          <a class="nav-link waves-effect" href="{{ path('adminDevices') }}"><i
+              class="fa fa-microchip left"></i>&nbsp;Dispositivos</a>
+        </li>
+        {% endif %}
+        {% endif %}
+
+
+      </ul>
+
+      <ul class="navbar-nav nav-flex-left">
+        <ul class="navbar-nav nav-flex-left">
+          {% if app.request.get('_route') == 'passUpdate' %}
+          <li class="nav-item dropdown nombre btn-group active">
+            {% else %}
+          <li class="nav-item dropdown nombre btn-group">
+            {% endif %}
+            <a class="nav-link dropdown-toggle waves-effect" id="dropdownMenu1" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false"><strong>
+                {% if is_granted('ROLE_ADMIN') %}
+                <i class="fa fa-user-secret left"></i>
                 {% else %}
-                <li class="nav-item waves-effect">
-                  <a class="nav-link waves-effect" href="{{ path('adminUsers') }}"><i class="fa fa-users left"></i>&nbsp;Usuarios</a>
-                </li>
+                <i class="fa fa-user-circle left"></i>
                 {% endif %}
-                {% if app.request.get('_route') == 'adminDevices' %}
-                <li class="nav-item waves-effect active ">
-                  <a class="nav-link waves-effect" style="color: black;cursor: default;"><i class="fa fa-microchip left"></i>&nbsp;Dispositivos</a>
-                </li>
-                {% else %}
-                <li class="nav-item waves-effect">
-                  <a class="nav-link waves-effect" href="{{ path('adminDevices') }}"><i class="fa fa-microchip left"></i>&nbsp;Dispositivos</a>
-                </li>
-                {% endif %}
-{% endif %}
-                
-                
-            </ul>
-         
-            <ul class="navbar-nav nav-flex-left">
-             <ul class="navbar-nav nav-flex-left">
-             {% if app.request.get('_route') == 'passUpdate' %}
-              <li class="nav-item dropdown nombre btn-group active">
-                {% else %}
-<li class="nav-item dropdown nombre btn-group">
-                {% endif %}
-                    <a class="nav-link dropdown-toggle waves-effect" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><strong>
-                    {% if is_granted('ROLE_ADMIN') %}
-                    <i class="fa fa-user-secret left"></i>
-                    {% else %}
-                    <i class="fa fa-user-circle left"></i>          
-                    {% endif %}
-                    &nbsp;{{ app.user.username }} </strong></a>
-                    <div class="dropdown-menu dropdown" aria-labelledby="dropdownMenu1">
-                    {% if app.request.get('_route') == 'passUpdate' %}
-                        <a class="dropdown-item waves-effect hoverable now" ><i class="fa fa-unlock-alt left"></i>&nbsp;Modificar Contrase&ntilde;a</a>
-                         {% else %}
-                        <a class="dropdown-item waves-effect hoverable" href="{{ path('passUpdate') }}"><i class="fa fa-unlock-alt left"></i>&nbsp;Modificar Contrase&ntilde;a</a>
-                         {% endif %}
-                        <a class="dropdown-item waves-effect hoverable" href="{{ path('logout') }}"><i class="fa fa-sign-out left"></i>&nbsp;Cerrar Sesion</a>
-                    </div>
-                </li>
-                </ul>
-        </div>
-        </div>
-    </nav>
+                &nbsp;{{ app.user.username }} </strong></a>
+            <div class="dropdown-menu dropdown" aria-labelledby="dropdownMenu1">
+              {% if app.request.get('_route') == 'passUpdate' %}
+              <a class="dropdown-item waves-effect hoverable now"><i class="fa fa-unlock-alt left"></i>&nbsp;Modificar
+                Contrase&ntilde;a</a>
+              {% else %}
+              <a class="dropdown-item waves-effect hoverable" href="{{ path('passUpdate') }}"><i
+                  class="fa fa-unlock-alt left"></i>&nbsp;Modificar Contrase&ntilde;a</a>
+              {% endif %}
+              <a class="dropdown-item waves-effect hoverable" href="{{ path('logout') }}"><i
+                  class="fa fa-sign-out left"></i>&nbsp;Cerrar Sesion</a>
+            </div>
+          </li>
+        </ul>
+    </div>
+  </div>
+</nav>

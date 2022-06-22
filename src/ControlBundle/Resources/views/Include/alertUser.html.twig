@@ -1,11 +1,9 @@
-
-
-
-<div class="modal fade right" id="mensaje_registrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade right" id="mensaje_registrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-notify  modal-full-height modal-right" role="document">
-     
+
         <div class="modal-content">
-        
+
             <div class="modal-header dark-header">
                 <p class="heading lead">Registrar Usuario</p>
 
@@ -16,70 +14,79 @@
 
             <div class="modal-body ">
                 <div class="text-center">
-                   <i class="fa fa-user-plus fa-5x mb-1 animated rotateIn dark-icon"></i>
- 
-										
-										<h5 class="h5-resposive"> Informacion del usuario</h5>
+                    <i class="fa fa-user-plus fa-5x mb-1 animated rotateIn dark-icon"></i>
+
+
+                    <h5 class="h5-resposive"> Informacion del usuario</h5>
                 </div>
                 <hr>
                 <br>
-                
-
-      <form id="insertForm" method="POST" action="{{ path('insertUser') }}">
-      
-<div class="md-form error_div">
-            <i class="fa fa-user-circle prefix"></i>
-            <input id="codigo" name="codigo" type="text" required class="form-control validate"  pattern="[a-z0-9]{1,20}" title="Ingrese el nombre de usurio">
-            <label for="codigo" data-error="Incorrecto" data-success="Correcto">Ingresa el codigo </label>
-        </div>
-<br>
 
 
-<div class="md-form error2_div">
-            <i class="fa fa-lock prefix"></i>
-            <input  type="password" class="form-control validate"  id="password" name="password" pattern="[A-Za-z0-9]{6,20}" title="Ingrese una contraseña válida" placeholder="Ingresa la contrase&ntilde;a"/>
-        <label data-error="Incorrecto" data-success="Correcto" for="username">Ingresa la contrase&ntilde;a.</label>
+                <form id="insertForm" method="POST" action="{{ path('insertUser') }}">
+
+                    <div class="md-form error_div">
+                        <i class="fa fa-user-circle prefix"></i>
+                        <input id="codigo" name="codigo" type="text" required class="form-control validate"
+                            pattern="[a-z0-9]{1,20}" title="Ingrese el nombre de usurio">
+                        <label for="codigo" data-error="Incorrecto" data-success="Correcto">Ingresa el codigo </label>
+                    </div>
+                    <br>
+
+
+                    <div class="md-form error2_div">
+                        <i class="fa fa-lock prefix"></i>
+                        <input type="password" class="form-control validate" id="password" name="password"
+                            pattern="[A-Za-z0-9]{6,20}" title="Ingrese una contraseña válida"
+                            placeholder="Ingresa la contrase&ntilde;a" />
+                        <label data-error="Incorrecto" data-success="Correcto" for="username">Ingresa la
+                            contrase&ntilde;a.</label>
+                    </div>
+
+                    <br>
+
+                    <div class="md-form error3_div">
+                        <i class="fa fa-envelope prefix"></i>
+                        <input id="email" name="email" type="email" required class="form-control validate"
+                            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Ingrese un email v&aacute;lido">
+                        <label for="email" data-error="Incorrecto" data-success="Correcto">Ingresa el email</label>
+                    </div>
+                    <br>
+
+
+                    <div class="md-form error4_div">
+                        <i class="prefix"></i>
+                        <em> <i class="fa fa-id-card fa-2x left icon left"></i>&nbsp;&nbsp;&nbsp;&nbsp;Selecciona el rol
+                            de usuario</em>
+
+                        <select id="rol" name="rol" data-placeholder="Seleccione el rol de usuario"
+                            class="chosen-select form-control validate" tabindex="5">
+                            <optgroup label="Rol del Usuario">
+                                <option value="ROLE_USER">ROLE_USER</option>
+                                <option value="ROLE_ADMIN">ROLE_ADMIN</option>
+                            </optgroup>
+
+                        </select>
+
+                    </div>
+                    <br>
+
+                    <center><button class="btn btn-lg  btn-unique waves-effect hoverable" id="btn-validar"><i
+                                class='fa fa-plus left'></i> Registrar</button> </center>
+                </form>
             </div>
-      
-<br>
-
-<div class="md-form error3_div">
-            <i class="fa fa-envelope prefix"></i>
-            <input id="email" name="email" type="email" required class="form-control validate"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" title="Ingrese un email v&aacute;lido">
-            <label for="email" data-error="Incorrecto" data-success="Correcto">Ingresa el email</label>
-        </div>
-<br>
-
-
-<div class="md-form error4_div">
-<i class="prefix"></i>
-          <em> <i class="fa fa-id-card fa-2x left icon left"></i>&nbsp;&nbsp;&nbsp;&nbsp;Selecciona el rol de usuario</em>
- 
-         <select id="rol" name="rol" data-placeholder="Seleccione el rol de usuario" class="chosen-select form-control validate" tabindex="5">      
-            <optgroup label="Rol del Usuario">
-   <option value ="ROLE_USER">ROLE_USER</option> 
-   <option value ="ROLE_ADMIN">ROLE_ADMIN</option> 
-           </optgroup>
-               
-          </select>
-
- </div>
-     <br> 
-
-<center><button class="btn btn-lg  btn-unique waves-effect hoverable" id="btn-validar"><i class='fa fa-plus left'></i> Registrar</button>  </center>
-			</form>				
-            </div>
 
         </div>
-    
+
     </div>
 </div>
 
-<div class="modal fade right" id="mensaje_validation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade right" id="mensaje_validation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-notify modal-danger modal-full-height modal-right" role="document">
 
         <div class="modal-content">
-     
+
             <div class="modal-header">
                 <p class="heading lead">Error!</p>
 
@@ -97,17 +104,18 @@
             </div>
 
         </div>
- 
+
     </div>
 </div>
 
 
 
-<div class="modal fade right" id="mensaje_success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade right" id="mensaje_success" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-notify modal-success modal-side  modal-bottom-right" role="document">
 
         <div class="modal-content">
-     
+
             <div class="modal-header">
                 <p class="heading lead">Exito!</p>
 
@@ -121,7 +129,7 @@
                 <div class="text-center">
                     <i class="fa fa-check fa-5x mb-1 animated rotateIn"></i>
                     <p class="animated  tada lead imens">Los cambios fueron efectuados.</p>
-                 </div>
+                </div>
             </div>
 
 
@@ -130,11 +138,12 @@
     </div>
 </div>
 
-<div class="modal fade right" id="mensaje_sendfail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade right" id="mensaje_sendfail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-notify modal-danger modal-side  modal-bottom-right" role="document">
 
         <div class="modal-content">
-     
+
             <div class="modal-header">
                 <p class="heading lead">Hubo un Error!</p>
 
@@ -148,7 +157,7 @@
                 <div class="text-center">
                     <i class="fa fa-exclamation-circle fa-5x mb-1 animated rotateIn"></i>
                     <p id="msf" class="animated  tada lead imend"></p>
-                 </div>
+                </div>
             </div>
 
 
@@ -158,11 +167,12 @@
 </div>
 
 
-<div class="modal fade right" id="mensaje_updatefail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade right" id="mensaje_updatefail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-notify modal-warning modal-side  modal-bottom-right" role="document">
 
         <div class="modal-content">
-     
+
             <div class="modal-header">
                 <p class="heading lead">Alerta!</p>
 
@@ -176,7 +186,7 @@
                 <div class="text-center">
                     <i class="fa fa-exclamation-triangle fa-5x mb-1 animated rotateIn"></i>
                     <p id="muf" class="animated  tada lead imenw"></p>
-                 </div>
+                </div>
             </div>
 
 
@@ -185,11 +195,12 @@
     </div>
 </div>
 
-<div class="modal fade right" id="mensaje_updatesuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade right" id="mensaje_updatesuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-notify modal-success modal-side  modal-bottom-right" role="document">
 
         <div class="modal-content">
-     
+
             <div class="modal-header">
                 <p class="heading lead">Exito!</p>
 
@@ -203,7 +214,7 @@
                 <div class="text-center">
                     <i class="fa fa-check fa-5x mb-1 animated rotateIn"></i>
                     <p id="mus" class="animated  tada lead imens"></p>
-                 </div>
+                </div>
             </div>
 
 

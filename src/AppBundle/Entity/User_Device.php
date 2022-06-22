@@ -3,8 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User_Device
@@ -17,29 +17,28 @@ class User_Device
 {
 
 /**
-     * @var string
+ * @var string
 
-     * @ORM\Id
-     * @ORM\Column(name="pin", type="string", length=7, nullable=false)
+ * @ORM\Id
+ * @ORM\Column(name="pin", type="string", length=7, nullable=false)
 
-* @Assert\NotBlank(
-     *     message="El pin no puede estar vacio."
-     * )
+ * @Assert\NotBlank(
+ *     message="El pin no puede estar vacio."
+ * )
 
-     * @Assert\NotNull(
-     *     message="El pin no puede estar vacio."
-     * )
+ * @Assert\NotNull(
+ *     message="El pin no puede estar vacio."
+ * )
 
-* @Assert\Length(
-     *      min = 1,
-     *      max = 7,
-     *      minMessage = "El pin '{{ value }}' debe tener minimo {{ limit }} caracteres",
-     *      maxMessage = "El pin '{{ value }}' debe tener maximo {{ limit }} caracteres"
-     * )
+ * @Assert\Length(
+ *      min = 1,
+ *      max = 7,
+ *      minMessage = "El pin '{{ value }}' debe tener minimo {{ limit }} caracteres",
+ *      maxMessage = "El pin '{{ value }}' debe tener maximo {{ limit }} caracteres"
+ * )
 
-     */
+ */
     private $pin;
-
 
     /**
      * @ORM\Id;
@@ -49,7 +48,7 @@ class User_Device
      * @Assert\NotNull(
      *     message="El codigo de usuario no puede estar vacio."
      * )
-    * @Assert\Length(
+     * @Assert\Length(
      *      min = 1,
      *      max = 20,
      *      minMessage = "El usuario debe tener minimo {{ limit }} caracteres",
@@ -63,21 +62,19 @@ class User_Device
      * @ORM\Column(type="string", length=20, nullable=false)
      */
     protected $codigo;
-   
-    public function create ($pin,$codigo)
+
+    public function create($pin, $codigo)
     {
-$this->pin = $pin;
-$this->codigo = $codigo;
+        $this->pin = $pin;
+        $this->codigo = $codigo;
     }
 
-    
     public function setPin($pin)
     {
         $this->pin = $pin;
 
         return $this;
     }
-
 
     public function getPin()
     {
@@ -93,6 +90,5 @@ $this->codigo = $codigo;
     {
         return $this->codigo;
     }
-
 
 }
