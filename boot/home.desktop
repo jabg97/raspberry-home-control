@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=GPIO_UPDATE
+Exec=/home/pi/gpio_update.sh
+StartupNotify=false
+Terminal=true
+X-KeepTerminal=true

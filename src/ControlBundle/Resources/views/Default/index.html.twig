@@ -56,7 +56,7 @@ Pagina principal
                     $("#head_" + dom_id).removeClass("header-info");
                     $("#head_" + dom_id).addClass("header-danger");
                 }
-                console.log("La orden ha sido enviada");
+                console.log(respuesta);
             },
             error: function () {
                 swal({
@@ -79,17 +79,17 @@ Pagina principal
             url: `gpio/${id}/${signal}`,
             async: true,
             success: function (respuesta) {
-                if (signal == "0") {
-                    $("#val" + id).val("1");
+                if (respuesta.signal == "0") {
+                    $("#signal_val_" + id).val("1");
                     $("#head_" + id).addClass("header-success");
                     $("#head_" + id).removeClass("header-danger");
                 } else {
-                    $("#val" + id).val("0");
+                    $("#signal_val_" + id).val("0");
                     $("#head_" + id).removeClass("header-success");
                     $("#head_" + id).addClass("header-danger");
                 }
 
-                console.log("La orden ha sido enviada");
+                console.log(`Pin ${respuesta.pin} = ${respuesta.signal}`);
             },
             error: function () {
                 swal({

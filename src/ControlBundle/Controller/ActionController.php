@@ -109,7 +109,7 @@ class ActionController extends Controller
         $device->setSignal($signal);
         $em->persist($device);
         $em->flush();
-        return new RedirectResponse($this->generateUrl('home'));
+        return new JsonResponse(array("pin"=> $id, "signal"=> $signal));
 
     }
 

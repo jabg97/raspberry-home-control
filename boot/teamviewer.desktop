@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=TeamViewer
+Exec=teamviewer
+StartupNotify=false
+Terminal=true
+X-KeepTerminal=true

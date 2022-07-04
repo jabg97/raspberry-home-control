@@ -1,8 +1,8 @@
 <?php
-$json = json_decode(file_get_contents("http://192.168.18.19/home/web/json"));
+$json = json_decode(file_get_contents("http://localhost/home/web/json"));
 if (count($json) > 0) {
     foreach ($json as $device) {
-        $data = explode($device->log, "-:-", 2);
+        $data = explode("-:-", $device->log, 2);
         $comando = "gpio mode " . $data[0] . " out";
         exec($comando);
         if (count($data) > 1) {
